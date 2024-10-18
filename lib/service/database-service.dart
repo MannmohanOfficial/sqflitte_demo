@@ -67,4 +67,20 @@ class DBHelper {
     return res.map((todoMap) => ToDo.fromMap(todoMap)).toList();
   }
 
+  Future<ToDo?> getToDoById(int id, int userId) async {
+    var dbClient = await database;
+    List<Map<String, dynamic>> response = await dbClient.query("todos", where: 'id = ? AND userId = ?', whereArgs: [id, userId]);
+    return response.isNotEmpty ? ToDo.fromMap(response.first) : null;
+  }
+
+  Future<int> updateToDoItem(int id, ToDo newItem) async {
+    var dbClient = await database;
+    return await dbClient.update(
+        "todos",
+        newItem.toMap(),
+        where: "id = ?",
+        whereArgs: [id],
+    );
+  }
+
 }
