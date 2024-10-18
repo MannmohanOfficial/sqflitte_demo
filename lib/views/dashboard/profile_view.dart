@@ -17,6 +17,7 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   final DBHelper _dbHelper = DBHelper();
   String userName = "";
+  String email = "";
 
   void getUserInfo() async {
     var userId = prefs.getInt(PrefKeys.userId);
@@ -24,6 +25,7 @@ class _ProfileViewState extends State<ProfileView> {
     if (info != null) {
       setState(() {
         userName = info.username;
+        email = info.email;
       });
     }
   }
@@ -57,7 +59,7 @@ class _ProfileViewState extends State<ProfileView> {
               children: [
                 const CircleAvatar(
                   radius: 50,
-                  backgroundImage: AssetImage(TodoImages.logo), // Replace with your image
+                  backgroundImage: AssetImage(TodoImages.profile), // Replace with your image
                   backgroundColor: Colors.white, // Border around image
                 ),
                 const SizedBox(height: 10),
@@ -65,6 +67,14 @@ class _ProfileViewState extends State<ProfileView> {
                   userName,
                   style: const TextStyle(
                     fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                    color: TodoColor.buttonColor, // Dark maroon text
+                  ),
+                ),
+                Text(
+                  email,
+                  style: const TextStyle(
+                    fontSize: 18,
                     fontWeight: FontWeight.w900,
                     color: TodoColor.buttonColor, // Dark maroon text
                   ),

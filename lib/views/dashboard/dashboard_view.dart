@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sqflitte_demo/main.dart';
 import 'package:sqflitte_demo/utils/appColors.dart';
 import 'package:sqflitte_demo/utils/pref_keys.dart';
+import 'package:sqflitte_demo/views/dashboard/add_task_view.dart';
 import 'package:sqflitte_demo/views/dashboard/complete_view.dart';
 import 'package:sqflitte_demo/views/dashboard/inprogress_view.dart';
 import 'package:sqflitte_demo/views/dashboard/profile_view.dart';
@@ -23,6 +24,7 @@ class _DashboardViewState extends State<DashboardView> {
     const InprogressView(),
     const CompleteView(),
     const ProfileView(),
+    const AddTaskView(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -34,26 +36,37 @@ class _DashboardViewState extends State<DashboardView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: _currentIndex == 3
           ? GestureDetector(
-            onTap: () {
-              prefs.setBool(PrefKeys.isLoggedIn, false);
-              prefs.remove(PrefKeys.userId);
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginView()));
-            },
-            child: const Row(
+              onTap: () {
+                prefs.setBool(PrefKeys.isLoggedIn, false);
+                prefs.remove(PrefKeys.userId);
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const LoginView()));
+              },
+              child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [Icon(Icons.logout), Text("logout")],
               ),
-          )
-          : FloatingActionButton(
-              shape: const CircleBorder(),
-              backgroundColor: TodoColor.buttonColor,
-              onPressed: () {},
-              child: const Icon(
-                Icons.add_rounded,
-                color: Colors.white,
-                size: 45,
-              ),
-            ),
+            )
+          : _currentIndex == 4
+              ? FloatingActionButton(
+                  onPressed: () {},
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                )
+              : FloatingActionButton(
+                  shape: const CircleBorder(),
+                  backgroundColor: TodoColor.buttonColor,
+                  onPressed: () {
+                    setState(() {
+                      _currentIndex = 4;
+                    });
+                  },
+                  child: const Icon(
+                    Icons.add_rounded,
+                    color: Colors.white,
+                    size: 45,
+                  ),
+                ),
       bottomNavigationBar: BottomAppBar(
         color: TodoColor.buttonColor,
         shape: const CircularNotchedRectangle(),
@@ -85,7 +98,7 @@ class _DashboardViewState extends State<DashboardView> {
                 });
               },
             ),
-            SizedBox(width: 40), // Add space for the floating button
+            const SizedBox(width: 40), // Add space for the floating button
             IconButton(
               icon: const Icon(
                 Icons.settings_outlined,

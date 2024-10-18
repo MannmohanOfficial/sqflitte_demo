@@ -12,14 +12,14 @@ class AuthHeader extends StatelessWidget {
       children: [
         Text(
           header,
-          style: TextStyle(
+          style: const TextStyle(
             color: TodoColor.headerText,
             fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: 8.0),
-        Text(
+        const Text(
           "Welcome to ToDo app!",
           style: TextStyle(
             color: Colors.black,

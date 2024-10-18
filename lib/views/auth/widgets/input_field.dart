@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import '../../../utils/appColors.dart';
-import '../../../utils/appImages.dart';
 
 class InputField extends StatefulWidget {
   final String labelText, hintText, prefixIcon;

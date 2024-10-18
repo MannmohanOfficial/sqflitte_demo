@@ -31,7 +31,6 @@ class _SignupViewState extends State<SignupView> {
       password: _passwordController.text.trim(),
     );
     var res = await _dbHelper.insertNewUser(user);
-    print(res);
     if (res > 0) {
       Navigator.of(context).push(
         MaterialPageRoute(

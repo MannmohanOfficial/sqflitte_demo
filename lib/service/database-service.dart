@@ -29,7 +29,7 @@ class DBHelper {
         await db.execute(
             "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL)");
         await db.execute(
-            "CREATE TABLE todos(id INTEGER PRIMARY KEY AUTOINCREMENT, userId INTEGER, title TEXT, description TEXT, isCompleted INTEGER, FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE)");
+            "CREATE TABLE todos(id INTEGER PRIMARY KEY AUTOINCREMENT, userId INTEGER, title TEXT, description TEXT, isCompleted INTEGER, priority INTEGER, FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE)");
       }
     );
   }
@@ -63,6 +63,7 @@ class DBHelper {
   Future<List<ToDo>> getTodos(int userId) async {
     var dbClient = await database;
     List<Map<String, dynamic>> res = await dbClient.query('todos', where: "userId = ?", whereArgs: [userId]);
+    print(res);
     return res.map((todoMap) => ToDo.fromMap(todoMap)).toList();
   }
 

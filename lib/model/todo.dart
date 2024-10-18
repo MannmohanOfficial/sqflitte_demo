@@ -9,14 +9,16 @@ class ToDo {
   final int userId;
   final String title;
   final String description;
-  final int isCompleted;
+  final int? isCompleted;
+  final int priority;
 
   ToDo({
     this.id,
     required this.userId,
     required this.title,
     required this.description,
-    required this.isCompleted,
+    this.isCompleted,
+    required this.priority,
   });
 
   factory ToDo.fromMap(Map<String, dynamic> json) => ToDo(
@@ -24,7 +26,8 @@ class ToDo {
     userId: json["userId"],
     title: json["title"],
     description: json["description"],
-    isCompleted: json["isCompleted"],
+    isCompleted: json["isCompleted"] ?? null,
+    priority: json["priority"],
   );
 
   Map<String, dynamic> toMap() => {
@@ -32,6 +35,7 @@ class ToDo {
     "userId": userId,
     "title": title,
     "description": description,
-    "isCompleted": isCompleted,
+    "isCompleted":isCompleted,
+    "priority": priority,
   };
 }

@@ -24,15 +24,19 @@ class _LoginViewState extends State<LoginView> {
   final DBHelper _dbHelper = DBHelper();
 
   void loginUser() async {
+
     var response = await _dbHelper.validateUser(
       _emailController.text.trim(),
       _passwordController.text.trim(),
     );
-
    if (response != null) {
      prefs.setBool(PrefKeys.isLoggedIn, true);
      prefs.setInt(PrefKeys.userId, response.id!);
      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const DashboardView()));
+   } else {
+     ScaffoldMessenger.of(context).showSnackBar(
+       const SnackBar(content: Text("Invalid User"))
+     );
    }
 
 
