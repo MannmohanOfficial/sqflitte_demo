@@ -86,7 +86,7 @@ class _AddTaskViewState extends State<AddTaskView> {
                   ),
                   SizedBox(
                     height: 24,
-                    child: Image.asset(TodoImages.logo),
+                    child: Image.asset(TodoImages.addTask),
                   ),
                   const CircleAvatar(
                     radius: 24,

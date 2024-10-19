@@ -1,5 +1,6 @@
 class TodoImages {
   static const logo = "assets/images/logo.png";
+  static const addTask = "assets/images/add_tsk.png";
   static const profile = "assets/images/image.png";
 
   static const userIcon = "assets/icons/user.png";
